@@ -1,0 +1,92 @@
+# SGFE-LC: Stability-Gated Foundation-Embedding Land-Cover mapping
+# Central Asia 2018 | GEE Cloud Project
+
+project:
+  name: SGFE-LC
+  gee_project: hallowed-chain-458005-g9
+  mapping_year: 2018
+  seed: 20260902
+  asset_root: projects/hallowed-chain-458005-g9/assets/sgfe_lc
+  drive_folder: SGFE_LC
+
+study_area:
+  countries:
+    KAZ: Kazakhstan
+    KGZ: Kyrgyzstan
+    TJK: Tajikistan
+    UZB: Uzbekistan
+    TKM: Turkmenistan
+  in_situ_countries: [KAZ, KGZ, TJK, UZB]
+  extrapolation_countries: [TKM]
+  bbox: [46.0, 35.0, 88.0, 56.0]  # west, south, east, north
+  boundary_source: FAO/GAUL/2015/level0
+
+years:
+  survey: [2013, 2014, 2017, 2018]
+  mapping: 2018
+  landsat: [2013, 2014, 2015, 2016, 2017, 2018]
+  sentinel: [2017, 2018]
+  aef: [2017, 2018]
+
+legend:
+  level1:
+    - {id: 1, name: Cropland, short: crop}
+    - {id: 2, name: Forest, short: forest}
+    - {id: 3, name: Grassland, short: grass}
+    - {id: 4, name: Shrubland, short: shrub}
+    - {id: 5, name: Bare, short: bare}
+    - {id: 6, name: Water, short: water}
+    - {id: 7, name: Built, short: built}
+    - {id: 8, name: SnowIce, short: snow}
+  min_test_n_stable: 50
+  min_test_n_cautious: 20
+
+splits:
+  block_km: 100
+  block_sensitivity_km: [50, 100, 200]
+  n_folds: 5
+  test_fraction_blocks: 0.20
+  min_test_sites: 100
+  min_train_per_class: 20
+  min_test_per_class: 10
+  max_test_site_fraction: 0.33
+  headline_classes: [1, 3, 4, 5]
+  buffer_m: 1000
+
+label_efficiency:
+  fractions: [0.05, 0.10, 0.20, 0.40, 0.80, 1.00]
+  repeats: 10
+
+migration:
+  high_confidence: 0.80
+  mid_confidence: 0.50
+  ndvi_change_max: 0.12
+  phenology_corr_min: 0.60
+  glc_window: 3
+
+pseudo_labels:
+  min_products_agree: 3
+  dw_maxprob_min: 0.65
+  max_per_class_ecoregion: 400
+  buffer_from_test_m: 2000
+
+models:
+  rf_trees: 400
+  xgb_trees: 300
+  xgb_depth: 6
+  gee_rf_trees: 400
+
+typical_zones:
+  fergana: [70.5, 40.2, 73.2, 41.5]
+  syr_darya: [66.0, 41.5, 69.5, 43.5]
+  n_kazakhstan: [66.0, 52.0, 72.0, 54.5]
+  tien_shan: [74.0, 41.0, 77.5, 43.0]
+
+paths:
+  raw_sites: data/raw
+  processed: data/processed
+  lookups: data/lookups
+  results: results
+  figures: results/figures
+  tables: results/tables
+  paper: paper

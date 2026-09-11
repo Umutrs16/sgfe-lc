@@ -1,0 +1,9 @@
+level1_id,level1_name,dynamic_world,esri_10m,glc_fcs30d_codes,naboureh_2023,notes
+1,Cropland,crops,5,"10,11,12,20",Cropland,Keep as independent class
+2,Forest,trees,2,"51,52,61,62,71,72,81,82,91,92",Forest,Keep even if scarce
+3,Grassland,grass,11,"130,140,153",Grassland,Central Asia hard class; Esri rangeland is mixed
+4,Shrubland,shrub_and_scrub,11,"120,121,122,152",Shrub lands,Do not merge into grass unless n<20
+5,Bare,bare,8,"150,200,201,202",Bare land,Includes sparse vegetation fc<0.15
+6,Water,water;flooded_vegetation,1;4,"181,182,183,184,185,186,187,210",Water;Wetland,Wetland merged if scarce
+7,Built,built,7,190,Built-up,Qualitative if n<20
+8,SnowIce,snow_and_ice,9,220,Snow/Ice,Product validation only if scarce
